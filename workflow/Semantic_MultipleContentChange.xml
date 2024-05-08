@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
-        <fullName>MyOtherEmailAlert</fullName>
+        <fullName>MyEmailAlert</fullName>
         <description>MyOtherEmailAlert</description>
-        <protected>false</protected>
+        <protected>true</protected>
         <recipients>
-            <recipient>tom-dev@gearset.com</recipient>
-            <type>user</type>
-        </recipients>
-        <senderType>CurrentUser</senderType>
-        <template>unfiled$public/CommunityWelcomeEmailTemplate</template>
-    </alerts>
-    <alerts>
-        <fullName>RenamedMovableEmailAlert</fullName>
-        <description>MyOtherEmailAlert</description>
-        <protected>false</protected>
-        <recipients>
-            <recipient>tom-dev@gearset.com</recipient>
+            <recipient>test@gearset.com</recipient>
             <type>user</type>
         </recipients>
         <senderType>CurrentUser</senderType>
         <template>unfiled$public/CommunityWelcomeEmailTemplate</template>
     </alerts>     
     <alerts>
-        <fullName>MyEmailAlert</fullName>
+        <fullName>MyOtherEmailAlert</fullName>
+        <description>MyOtherEmailAlert</description>
+        <protected>true</protected>
+        <recipients>
+            <recipient>test@gearset.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/CommunityWelcomeEmailTemplate</template>
+    </alerts>
+    <alerts>
+        <fullName>AMovableEmailAlert</fullName>
         <description>MyOtherEmailAlert</description>
         <protected>false</protected>
         <recipients>
@@ -32,5 +32,5 @@
         </recipients>
         <senderType>CurrentUser</senderType>
         <template>unfiled$public/CommunityWelcomeEmailTemplate</template>
-    </alerts>        
+    </alerts> 
 </Workflow>

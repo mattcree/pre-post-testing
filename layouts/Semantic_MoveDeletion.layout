@@ -7,10 +7,6 @@
         <label>Information</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>DocumentNumber</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>InvoiceNumber</field>
             </layoutItems>
@@ -28,10 +24,6 @@
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>InvoiceDate</field>
-            </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>DueDate</field>
