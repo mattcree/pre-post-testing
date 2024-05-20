@@ -6,6 +6,10 @@
         <editHeading>true</editHeading>
         <label>Information</label>
         <layoutColumns>
+        <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ReferenceEntityId-FEAT</field>
+            </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>DocumentNumber</field>
@@ -17,10 +21,6 @@
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>BillingAccountId</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>ReferenceEntityId</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -39,6 +39,10 @@
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Status</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>TotalAmountWithTax-FEAT</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -64,17 +68,14 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>TotalTaxAmount</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>TotalAmount</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>TotalAmountWithTax</field>
-            </layoutItems>
+            </layoutItems>                       
         </layoutColumns>
-        <layoutColumns />
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Editable</behavior>
+                <field>TotalAmount</field>
+            </layoutItems> 
+        </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
@@ -92,14 +93,14 @@
                 <field>CreatedDate</field>
             </layoutItems>
         </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>LastModifiedById</field>
-            </layoutItems>
+        <layoutColumns>            
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>LastModifiedDate</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Editable</behavior>
+                <field>LastModifiedById</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
