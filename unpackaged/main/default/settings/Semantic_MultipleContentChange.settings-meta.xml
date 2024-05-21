@@ -14,8 +14,26 @@
         <timeZoneId>Europe/Madrid</timeZoneId>
         <tuesdayEndTime>00:00:00.000Z</tuesdayEndTime>
         <tuesdayStartTime>00:00:00.000Z</tuesdayStartTime>
-        <wednesdayEndTime>00:00:00.000Z</wednesdayEndTime>
-        <wednesdayStartTime>00:00:00.000Z</wednesdayStartTime>
+        <wednesdayEndTime>20:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>12:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+        <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>00:00:00.000Z</fridayEndTime>
+        <fridayStartTime>00:00:00.000Z</fridayStartTime>
+        <mondayEndTime>00:00:00.000Z</mondayEndTime>
+        <mondayStartTime>00:00:00.000Z</mondayStartTime>
+        <name>UK</name>
+        <saturdayEndTime>00:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>00:00:00.000Z</saturdayStartTime>
+        <thursdayEndTime>00:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>00:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Europe/Madrid</timeZoneId>
+        <tuesdayEndTime>00:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>00:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>16:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>10:30:00.000Z</wednesdayStartTime>
     </businessHours>
     <holidays>
         <businessHours>Foo</businessHours>
