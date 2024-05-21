@@ -11,10 +11,6 @@
                 <field>DocumentNumber</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>InvoiceNumber</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Required</behavior>
                 <field>BillingAccountId</field>
             </layoutItems>
@@ -83,6 +79,11 @@
         <editHeading>true</editHeading>
         <label>SystemInformation</label>
         <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>InvoiceNumber</field>
+		<newTag>new</newTag>
+            </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>CreatedById</field>

@@ -6,11 +6,6 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>Accept</actionName>
-        <formFactor>Large</formFactor>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
-        <actionName>Accept</actionName>
         <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
@@ -155,15 +150,6 @@
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
     <fields>
-        <fullName>Dev_box_1__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>First label from dev sandbox 1</description>
-        <externalId>false</externalId>
-        <label>Dev box 1</label>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>Dev_box_1_part_2__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Dev sandbox one second new field</description>
@@ -213,5 +199,4 @@
         <errorDisplayField>Name</errorDisplayField>
         <errorMessage>Please enter dev box 1</errorMessage>
     </validationRules>
-    <visibility>Public</visibility>
 </CustomObject>
