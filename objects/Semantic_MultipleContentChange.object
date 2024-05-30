@@ -143,7 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>asdfsadfsad sadf</description>
+    <description>Feature description</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -157,24 +157,24 @@
     <fields>
         <fullName>Dev_box_1__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>First label from dev sandbox 1</description>
+        <description>First label from dev sandbox 1 feature</description>
         <externalId>false</externalId>
-        <label>Dev box 1</label>
+        <label>Dev box 1 feature</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Dev_box_1_part_2__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>Dev sandbox one second new field</description>
+        <description>Dev sandbox one second new field feature</description>
         <externalId>false</externalId>
-        <label>Dev box 1 part 2</label>
-        <trackTrending>false</trackTrending>
+        <label>Dev box 1 part 2 feature</label>
+        <trackTrending>true</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fieldSets>
         <fullName>Field_set_one</fullName>
-        <description>On custom object one.</description>
+        <description>On custom object one feature.</description>
         <displayedFields>
             <field>Dev_box_1__c</field>
             <isFieldManaged>false</isFieldManaged>
@@ -206,12 +206,12 @@
     <searchLayouts />
     <sharingModel>ReadWrite</sharingModel>
     <validationRules>
-        <fullName>Validation_rule_two</fullName>
-        <active>true</active>
-        <description>Validation rule two</description>
+        <fullName>Validation_rule_two feature</fullName>
+        <active>false</active>
+        <description>Validation rule two feature</description>
         <errorConditionFormula>Name  = &#39;Dev box 1&#39;</errorConditionFormula>
         <errorDisplayField>Name</errorDisplayField>
-        <errorMessage>Please enter dev box 1</errorMessage>
+        <errorMessage>Please enter dev box 1 feature</errorMessage>
     </validationRules>
-    <visibility>Public</visibility>
+    <visibility>Private</visibility>
 </CustomObject>
