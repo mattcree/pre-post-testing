@@ -1,28 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
   <fields>
-    <label>Orange</label>
+    <label>Dragon fruit</label>
     <name>Bob</name>
-  </fields>  
+  </fields>
+  <fields>
+    <label>Orange</label>
+    <name>Alice</name>
+  </fields>
+  <fieldSets>
+    <label>Orange</label>
+    <name>Chuck</name>
+  </fieldSets>
   <fieldSets>
     <label>Orange</label>
     <name>Bob</name>
+  </fieldSets>
+  <fieldSets>
+    <label>Orange</label>
+    <name>Alice</name>
   </fieldSets>
   <namedFilters>
     <label>Orange</label>
     <name>Bob</name>
   </namedFilters>
+  <namedFilters>
+    <label>Orange</label>
+    <name>Alice</name>
+  </namedFilters>
   <recordTypes>
     <label>Orange</label>
     <name>Bob</name>
+  </recordTypes>
+  <recordTypes>
+    <label>Orange</label>
+    <name>Alice</name>
   </recordTypes>
   <sharingReasons>
     <label>Orange</label>
     <name>Bob</name>
   </sharingReasons>
+  <sharingReasons>
+    <label>Orange</label>
+    <name>Alice</name>
+  </sharingReasons>
   <quickActions>
     <label>Orange</label>
     <name>Bob</name>
+  </quickActions>
+  <quickActions>
+    <label>Orange</label>
+    <name>Alice</name>
   </quickActions>
   <layouts>
     <label>Orange</label>
@@ -33,7 +61,7 @@
     </sections>
     <sections>
         <label>Apple</label>
-        <section>Alice</section>
+        <section>Sally</section>
     </sections>
   </layouts>
   <layouts>
@@ -45,19 +73,31 @@
     </sections>
     <sections>
         <label>Apple</label>
-        <section>Alice</section>
+        <section>Sally</section>
     </sections>
   </layouts>
   <validationRules>
     <label>Orange</label>
     <name>Bob</name>
   </validationRules>
+  <validationRules>
+    <label>Orange</label>
+    <name>Alice</name>
+  </validationRules>
   <webLinks>
     <label>Orange</label>
     <name>Bob</name>
   </webLinks>
+  <webLinks>
+    <label>Orange</label>
+    <name>Alice</name>
+  </webLinks>
   <workflowTasks>
     <label>Orange</label>
     <name>Bob</name>
-  </workflowTasks>  
+  </workflowTasks>
+  <workflowTasks>
+    <label>Apple</label>
+    <name>Alice</name>
+  </workflowTasks>
 </CustomObjectTranslation>
