@@ -19,6 +19,13 @@
         <value>This is an manual invoice.</value>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>Add Manual Invoice</shortDescription>
+        <shortDescription>Generate Manual Invoice</shortDescription>
+    </labels>
+    <labels>
+        <fullName>creditNoteManual</fullName>
+        <value>This is a manual credit note.</value>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Generate Manual Credit Note</shortDescription>
     </labels>
 </CustomLabels>

@@ -9,7 +9,7 @@
             <criteriaItems>
                 <field>Account.Type</field>
                 <operation>contains</operation>
-                <value>Prospect,Customer - Direct,Customer - Channel</value>
+                <value>Customer - Direct,Customer - Channel</value>
             </criteriaItems>
         </ruleEntry>
     </assignmentRule>
@@ -28,11 +28,6 @@
                 <field>Account.SLA__c</field>
                 <operation>equals</operation>
                 <value>Gold,Platinum</value>
-            </criteriaItems>
-            <criteriaItems>
-                <field>Account.Type</field>
-                <operation>contains</operation>
-                <value>Customer</value>
             </criteriaItems>
         </ruleEntry>
         <ruleEntry>

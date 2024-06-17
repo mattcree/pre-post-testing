@@ -203,15 +203,24 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Custom objects one</pluralLabel>
-    <searchLayouts />
-    <sharingModel>ReadWrite</sharingModel>
-    <validationRules>
+    <searchLayouts>
+      <insert>A</insert>
+      <insert>A</insert>
+      <validationRules>
+        <a>A</a>
+        <b>B</b>
         <fullName>Validation_rule_two</fullName>
         <active>true</active>
         <description>Validation rule two</description>
+        <b>B</b>
+        <b>D</b>
+        <b>B</b>
+        <b>B</b>
         <errorConditionFormula>Name  = &#39;Dev box 1&#39;</errorConditionFormula>
         <errorDisplayField>Name</errorDisplayField>
         <errorMessage>Please enter dev box 1</errorMessage>
     </validationRules>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

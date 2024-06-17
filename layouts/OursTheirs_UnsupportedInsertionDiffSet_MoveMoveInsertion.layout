@@ -11,10 +11,6 @@
                 <field>DocumentNumber</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>InvoiceNumber</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Required</behavior>
                 <field>BillingAccountId</field>
             </layoutItems>
@@ -28,6 +24,10 @@
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>InvoiceNumber</field>
+            </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>InvoiceDate</field>

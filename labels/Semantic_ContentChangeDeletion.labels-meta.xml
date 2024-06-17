@@ -8,13 +8,6 @@
         <shortDescription>Create Manual Quote</shortDescription>
     </labels>
     <labels>
-        <fullName>quoteAuto</fullName>
-        <value>This is an automatically generated quote.</value>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Generate Automatic Quote</shortDescription>
-    </labels>
-    <labels>
         <fullName>invoiceManual</fullName>
         <value>This is an manual invoice.</value>
         <language>en_US</language>

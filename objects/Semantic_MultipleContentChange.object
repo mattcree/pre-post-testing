@@ -143,7 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>asdfsadfsad sadf</description>
+    <description>Environment description</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -157,24 +157,24 @@
     <fields>
         <fullName>Dev_box_1__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>First label from dev sandbox 1</description>
+        <description>First label from dev sandbox 1 environment</description>
         <externalId>false</externalId>
-        <label>Dev box 1</label>
-        <trackTrending>false</trackTrending>
+        <label>Dev box 1 environment</label>
+        <trackTrending>true</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Dev_box_1_part_2__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Dev sandbox one second new field</description>
-        <externalId>false</externalId>
+        <externalId>true</externalId>
         <label>Dev box 1 part 2</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fieldSets>
         <fullName>Field_set_one</fullName>
-        <description>On custom object one.</description>
+        <description>On custom object one environment</description>
         <displayedFields>
             <field>Dev_box_1__c</field>
             <isFieldManaged>false</isFieldManaged>
@@ -209,9 +209,9 @@
         <fullName>Validation_rule_two</fullName>
         <active>true</active>
         <description>Validation rule two</description>
-        <errorConditionFormula>Name  = &#39;Dev box 1&#39;</errorConditionFormula>
+        <errorConditionFormula>Name  = &#39;Dev box env 1&#39;</errorConditionFormula>
         <errorDisplayField>Name</errorDisplayField>
-        <errorMessage>Please enter dev box 1</errorMessage>
+        <errorMessage>Please enter dev box 1 env</errorMessage>
     </validationRules>
-    <visibility>Public</visibility>
+    <visibility>Internal</visibility>
 </CustomObject>
