@@ -1,12 +1,75 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>60.0</apiVersion>
+    <assignments>
+        <name>Escalation_Status</name>
+        <label>Escalation Status</label>
+        <locationX>159</locationX>
+        <locationY>2387</locationY>
+        <assignmentItems>
+            <assignToReference>Escalation_Var.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Escalations_Loop.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Escalation_Var.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Withdrawn</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Escalations_Col</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Escalation_Var</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Escalations_Loop</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Inspection_Status</name>
+        <label>Inspection Status</label>
+        <locationX>159</locationX>
+        <locationY>1679</locationY>
+        <assignmentItems>
+            <assignToReference>Inspection_Var.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Inspections_Loop.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Inspection_Var.Inspection_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Canceled</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Inspection_Col</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Inspection_Var</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Inspections_Loop</targetReference>
+        </connector>
+    </assignments>
     <decisions>
-        <name>Buy_Sell_Closing_Date_Updated</name>
+        <name>Closing_Date_Updated</name>
         <label>Buy-Sell Closing Date Updated?</label>
-        <locationX>374</locationX>
+        <locationX>632</locationX>
         <locationY>839</locationY>
-        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <defaultConnector>
+            <targetReference>Product</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>YesClosingDateUpdated</name>
             <conditionLogic>and</conditionLogic>
@@ -37,13 +100,59 @@
             <label>Yes</label>
         </rules>
     </decisions>
+    <assignments>
+        <name>Assign_Inspection_Original_Post_Option_Stage_Date</name>
+        <label>Assign Inspection - Original Post Option Stage Date</label>
+        <locationX>297</locationX>
+        <locationY>1079</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_Inspections.Original_Post_Option_Stage_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record__Prior.Post_Option_Stage_Date__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>PropertyDetailsToUpdate_ColVar</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Inspections</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Inspections</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_PIO_Original_Post_Option_Stage_Date</name>
+        <label>Assign PIO - Original Post Option Stage Date</label>
+        <locationX>209</locationX>
+        <locationY>1271</locationY>
+        <assignmentItems>
+            <assignToReference>PIO_rVar.Original_Post_Option_Stage_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record__Prior.Post_Option_Stage_Date__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>PropertyDetailsToUpdate_ColVar</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>PIO_rVar</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_PIO_Inspections</targetReference>
+        </connector>
+    </assignments>
     <decisions>
         <name>Commitment</name>
         <label>Commitment?</label>
         <locationX>176</locationX>
         <locationY>323</locationY>
         <defaultConnector>
-            <targetReference>Post_Option_Stage_Date_Filled_For_The_First_Time</targetReference>
+            <targetReference>Populate_Original_Post_Option_Stage_Date</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Update</defaultConnectorLabel>
         <rules>
@@ -60,26 +169,81 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Post_Option_Stage_Date_Filled_For_The_First_Time</name>
-        <label>Post Option Stage Date Filled For The First Time?</label>
-        <locationX>374</locationX>
+        <name>MovedtoStatus</name>
+        <label>Moved to Status</label>
+        <locationX>401</locationX>
+        <locationY>1247</locationY>
+        <defaultConnectorLabel>Other</defaultConnectorLabel>
+        <rules>
+            <name>ContractCancelledStatus</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Contract Cancelled</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>GetRelatedInspections</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Contract Cancelled</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Inspection_Records</name>
+        <label>Inspection Records?</label>
+        <locationX>341</locationX>
+        <locationY>647</locationY>
+        <defaultConnector>
+            <targetReference>Update_PIO_Inspections</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>YesInspectionRecords</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Inspection_Overview__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_PIO</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Populate_Original_Post_Option_Stage_Date</name>
+        <label>Populate Original Post Option Stage Date?</label>
+        <locationX>495</locationX>
         <locationY>431</locationY>
         <defaultConnector>
             <targetReference>Buy_Sell_Closing_Date_Updated</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
-            <name>YesPostOptionStageForTheFirstTime</name>
+            <name>YesPostOptionStageChanged</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record__Prior.Post_Option_Stage_Date__c</leftValueReference>
-                <operator>IsNull</operator>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Post Option</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>$Record.Post_Option_Stage_Date__c</leftValueReference>
+                <leftValueReference>$Record__Prior.Post_Option_Stage_Date__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
@@ -93,7 +257,77 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Fill_Original_Post_Option_Stage_Date</targetReference>
+                <targetReference>Update_HP_Original_Post_Option_Stage_Date</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>SFS-4389</description>
+    <decisions>
+        <name>Product</name>
+        <label>Product?</label>
+        <locationX>632</locationX>
+        <locationY>1139</locationY>
+        <defaultConnectorLabel>Other</defaultConnectorLabel>
+        <rules>
+            <name>SBYLProduct</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Product_Name__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>SBYL</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>MovedtoStatus</targetReference>
+            </connector>
+            <label>SBYL</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Related_Escalation_Found</name>
+        <label>Related Escalation Found</label>
+        <locationX>203</locationX>
+        <locationY>2171</locationY>
+        <defaultConnectorLabel>no</defaultConnectorLabel>
+        <rules>
+            <name>YesRelated_Escalation_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>GetRelatedEscalations</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Escalations_Loop</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Related_Inspection_Found</name>
+        <label>Related Inspection Found</label>
+        <locationX>203</locationX>
+        <locationY>1463</locationY>
+        <defaultConnector>
+            <targetReference>GetRelatedEscalations</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>YesRelated_Inspection_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>GetRelatedInspections</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inspections_Loop</targetReference>
             </connector>
             <label>Yes</label>
         </rules>
@@ -106,6 +340,48 @@
     </formulas>
     <interviewLabel>Transaction: HP: After Save {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Transaction: HP: After Save</label>
+    <loops>
+        <name>Loop_Inspections</name>
+        <label>Loop Inspections</label>
+        <locationX>209</locationX>
+        <locationY>971</locationY>
+        <collectionReference>Get_Inspections</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_Inspection_Original_Post_Option_Stage_Date</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Assign_PIO_Original_Post_Option_Stage_Date</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Escalations_Loop</name>
+        <label>Escalations Loop</label>
+        <locationX>71</locationX>
+        <locationY>2279</locationY>
+        <collectionReference>GetRelatedEscalations</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Escalation_Status</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Escalations</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Inspections_Loop</name>
+        <label>Inspections Loop</label>
+        <locationX>71</locationX>
+        <locationY>1571</locationY>
+        <collectionReference>GetRelatedInspections</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Inspection_Status</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Inspections</targetReference>
+        </noMoreValuesConnector>
+    </loops>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -125,10 +401,138 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>GetRelatedEscalations</name>
+        <label>Related Escalations</label>
+        <locationX>203</locationX>
+        <locationY>2063</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Related_Escalation_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Offer__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Exception_Escalation__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>GetRelatedInspections</name>
+        <label>Related Inspections</label>
+        <locationX>203</locationX>
+        <locationY>1355</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Related_Inspection_Found</targetReference>
+        </connector>
+        <filterLogic>(1 OR 2) AND 3</filterLogic>
+        <filters>
+            <field>Related_Homeward_Purchase__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Inspection_Overview__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Inspection_Overview__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Inspection_Type__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Property_Condition__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Inspections</name>
+        <label>Get Inspections</label>
+        <locationX>209</locationX>
+        <locationY>863</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Inspections</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Inspection_Overview__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>PIO_rVar.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Record_Type_Name__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Inspection</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Property_Condition__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_PIO</name>
+        <label>Get PIO</label>
+        <locationX>209</locationX>
+        <locationY>755</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Inspections</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Related_Homeward_Purchase__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Record_Type_Name__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Purchase Inspection Overview</stringValue>
+            </value>
+        </filters>
+        <object>Property_Condition__c</object>
+        <outputReference>PIO_rVar</outputReference>
+        <queriedFields>Id</queriedFields>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_HP_Original_Post_Option_Stage_Date</name>
+        <label>Update HP - Original Post Option Stage Date</label>
+        <locationX>341</locationX>
+        <locationY>539</locationY>
+        <connector>
+            <targetReference>Inspection_Records</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Original_Post_Option_Stage_Date__c</field>
+            <value>
+                <elementReference>$Record__Prior.Post_Option_Stage_Date__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
     <recordUpdates>
         <name>Fill_Original_Post_Option_Stage_Date</name>
         <label>Fill Original Post Option Stage Date</label>
-        <locationX>242</locationX>
+        <locationX>500</locationX>
         <locationY>539</locationY>
         <connector>
             <targetReference>Fill_Original_Post_Option_Stage_Date_PIO</targetReference>
@@ -144,10 +548,10 @@
     <recordUpdates>
         <name>Fill_Original_Post_Option_Stage_Date_PIO</name>
         <label>Fill Original Post Option Stage Date PIO</label>
-        <locationX>242</locationX>
+        <locationX>500</locationX>
         <locationY>647</locationY>
         <connector>
-            <targetReference>Buy_Sell_Closing_Date_Updated</targetReference>
+            <targetReference>Closing_Date_Updated</targetReference>
         </connector>
         <inputAssignments>
             <field>Original_Post_Option_Stage_Date__c</field>
@@ -158,11 +562,31 @@
         <inputReference>$Record.Inspection_Overview__r</inputReference>
     </recordUpdates>
     <recordUpdates>
-        <description>RecordTypeId = 0124P0000003QxnQAE ==&gt; &apos;Old Home Sale&apos;</description>
+        <name>Update_Escalations</name>
+        <label>Update Escalations</label>
+        <locationX>71</locationX>
+        <locationY>2579</locationY>
+        <inputReference>Escalations_Col</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Inspections</name>
+        <label>Update Inspections</label>
+        <locationX>71</locationX>
+        <locationY>1871</locationY>
+        <connector>
+            <targetReference>GetRelatedEscalations</targetReference>
+        </connector>
+        <inputReference>Inspection_Col</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>RecordTypeId = 0124P0000003QxnQAE ==&gt; 'Old Home Sale'</description>
         <name>Update_OHS</name>
         <label>Update OHS</label>
-        <locationX>242</locationX>
-        <locationY>947</locationY>
+        <locationX>500</locationX>
+        <locationY>1763</locationY>
+        <connector>
+            <targetReference>Product</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>RecordTypeId</field>
@@ -193,6 +617,16 @@
         </inputAssignments>
         <object>Offer__c</object>
     </recordUpdates>
+    <recordUpdates>
+        <name>Update_PIO_Inspections</name>
+        <label>Update PIO/Inspections</label>
+        <locationX>341</locationX>
+        <locationY>1463</locationY>
+        <connector>
+            <targetReference>Buy_Sell_Closing_Date_Updated</targetReference>
+        </connector>
+        <inputReference>PropertyDetailsToUpdate_ColVar</inputReference>
+    </recordUpdates>
     <start>
         <locationX>50</locationX>
         <locationY>0</locationY>
@@ -212,4 +646,52 @@
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
+    <variables>
+        <name>PIO_rVar</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Property_Condition__c</objectType>
+    </variables>
+    <variables>
+        <name>PropertyDetailsToUpdate_ColVar</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Property_Condition__c</objectType>
+    </variables>
+    <variables>
+        <name>Escalation_Var</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Exception_Escalation__c</objectType>
+    </variables>
+    <variables>
+        <name>Escalations_Col</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Exception_Escalation__c</objectType>
+    </variables>
+    <variables>
+        <name>Inspection_Col</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Property_Condition__c</objectType>
+    </variables>
+    <variables>
+        <name>Inspection_Var</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Property_Condition__c</objectType>
+    </variables>
 </Flow>
